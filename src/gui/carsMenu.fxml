@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="356.0" prefWidth="693.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView fx:id="carsTableView" layoutX="14.0" layoutY="14.0" onMouseClicked="#carsTableViewClicked" prefHeight="324.0" prefWidth="425.0">
+        <columns>
+          <TableColumn fx:id="idColumn" prefWidth="50.0" text="ID" />
+          <TableColumn fx:id="makeColumn" prefWidth="75.0" text="Make" />
+            <TableColumn fx:id="modelColumn" prefWidth="75.0" text="Model" />
+            <TableColumn fx:id="rentalPriceColumn" prefWidth="75.0" text="Price" />
+            <TableColumn fx:id="manufacturingYearColumn" prefWidth="75.0" text="Year" />
+            <TableColumn fx:id="availableColumn" prefWidth="75.0" text="Available" />
+        </columns>
+      </TableView>
+      <Button fx:id="addButton" layoutX="457.0" layoutY="207.0" mnemonicParsing="false" onAction="#addCar" prefHeight="25.0" prefWidth="51.0" text="Add" />
+      <Button fx:id="deleteButton" layoutX="513.0" layoutY="207.0" mnemonicParsing="false" onAction="#deleteCar" prefHeight="25.0" prefWidth="51.0" text="Delete" />
+      <Button fx:id="modifyButton" layoutX="567.0" layoutY="207.0" mnemonicParsing="false" onAction="#modifyCar" text="Modify" />
+      <GridPane layoutX="457.0" layoutY="14.0" prefHeight="180.0" prefWidth="219.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.33331298828125" minWidth="10.0" prefWidth="58.66666666666667" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="143.99997965494788" minWidth="10.0" prefWidth="142.66666666666663" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="ID:" />
+            <Label text="Make:" GridPane.rowIndex="1" />
+            <Label text="Available:" GridPane.rowIndex="5" />
+            <Label text="Model:" GridPane.rowIndex="2" />
+            <Label text="Price:" GridPane.rowIndex="3" />
+            <Label text="Year:" GridPane.rowIndex="4" />
+            <TextField fx:id="idTextField" prefHeight="25.0" prefWidth="153.0" GridPane.columnIndex="1" />
+            <TextField fx:id="makeTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="modelTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="rentalPriceTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="manufacturingYearTextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="availableTextField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+         </children>
+      </GridPane>
+      <ChoiceBox fx:id="filterByChoiceBox" layoutX="532.0" layoutY="282.0" prefHeight="25.0" prefWidth="144.0" />
+      <Label layoutX="457.0" layoutY="286.0" text="Filter by:" />
+      <Button fx:id="clearButton" layoutX="623.0" layoutY="207.0" mnemonicParsing="false" onAction="#clearFields" prefHeight="25.0" prefWidth="53.0" text="Clear" />
+      <Button fx:id="filterButton" layoutX="457.0" layoutY="313.0" mnemonicParsing="false" onAction="#filterByCars" prefHeight="25.0" prefWidth="88.0" text="Filter" />
+      <Button fx:id="restoreButton" layoutX="552.0" layoutY="313.0" mnemonicParsing="false" onAction="#restoreCars" prefHeight="25.0" prefWidth="124.0" text="Restore / Refresh" />
+   </children>
+</Pane>

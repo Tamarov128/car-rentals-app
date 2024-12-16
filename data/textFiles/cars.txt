@@ -1,0 +1,5 @@
+1,Toyota,Camry,120.0,2018,false
+2,Mazda,MX-30,250.0,2020,true
+3,Dacia,Logan,200.0,2013,true
+4,Mitsubishi,Eclipse Cross,240.0,2024,true
+5,Dacia,Spring,240.0,2022,true
