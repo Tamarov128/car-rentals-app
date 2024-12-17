@@ -53,4 +53,9 @@ public class MemoryRepository<ID,T extends Identifiable<ID>> implements Reposito
         return elements.values();
     }
 
+    @Override
+    public int size() {
+        return elements.size();
+    }
+
 }

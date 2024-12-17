@@ -5,9 +5,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import service.Service;
 import utils.exceptions.CarNotValidException;
 import utils.exceptions.IDNotValidException;
@@ -86,6 +89,15 @@ public class CarsMenuController {
     private Button filterButton;
     @FXML
     private Button restoreButton;
+
+    @FXML
+    private TextField entitiesNumberTextField;
+
+    @FXML
+    private Button populateTableButton;
+
+    @FXML
+    private Button increasePriceButton;
 
     @FXML
     void carsTableViewClicked(MouseEvent event) {
@@ -246,4 +258,38 @@ public class CarsMenuController {
         cars.setAll(carsList);
     }
 
+    @FXML
+    void populateTable(ActionEvent event) {
+        int entitiesNumber = Integer.parseInt(entitiesNumberTextField.getText());
+        if (entitiesNumber <= 0) {
+            displayWarning("No entities selected");
+        }
+        else {
+            try {
+                service.populateCars(entitiesNumber);
+            }
+            catch (CarNotValidException | IDNotValidException e) {
+                displayError(e);
+            }
+        }
+
+    }
+
+    @FXML
+    void increasePrice(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(GUI.class.getResource("bulkUpdate.fxml"));
+        BulkUpdateController controller = new BulkUpdateController(service);
+        loader.setController(controller);
+        Scene scene = new Scene(loader.load());
+        stage.setScene(scene);
+        stage.setTitle("Bulk Update");
+        stage.showAndWait();
+        // update cars list
+        List<Car> carsList = new ArrayList<>();
+        for (Car car : service.getAllCars()) {
+            carsList.add(car);
+        }
+        cars.setAll(carsList);
+    }
 }

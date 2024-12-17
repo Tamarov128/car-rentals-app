@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="204.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="16.0" layoutY="106.0" text="Number of threads:" />
+      <TextField fx:id="threadsNumberTextField" layoutX="169.0" layoutY="102.0" prefHeight="25.0" prefWidth="132.0" />
+      <Button fx:id="bulkUpdateButton" layoutX="16.0" layoutY="165.0" mnemonicParsing="false" onAction="#bulkUpdate" prefHeight="25.0" prefWidth="285.0" text="Perform bulk update" />
+      <ChoiceBox fx:id="threadsChoiceBox" layoutX="169.0" layoutY="132.0" prefHeight="25.0" prefWidth="132.0" />
+      <Label layoutX="16.0" layoutY="41.0" text="Price increase (%):" />
+      <TextField fx:id="percentageTextField" layoutX="169.0" layoutY="37.0" prefHeight="25.0" prefWidth="132.0" />
+      <Label layoutX="16.0" layoutY="74.0" text="Year:" />
+      <TextField fx:id="yearTextField" layoutX="169.0" layoutY="70.0" prefHeight="25.0" prefWidth="132.0" />
+      <Label layoutX="16.0" layoutY="136.0" text="Threads type:" />
+      <Label layoutX="14.0" layoutY="6.0" prefHeight="25.0" prefWidth="285.0" text="Price increase of cars manufactured after a given year:" />
+   </children>
+</Pane>
