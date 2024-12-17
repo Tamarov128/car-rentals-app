@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="356.0" prefWidth="693.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="433.0" prefWidth="693.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TableView fx:id="carsTableView" layoutX="14.0" layoutY="14.0" onMouseClicked="#carsTableViewClicked" prefHeight="324.0" prefWidth="425.0">
+      <TableView fx:id="carsTableView" layoutX="14.0" layoutY="14.0" onMouseClicked="#carsTableViewClicked" prefHeight="406.0" prefWidth="425.0">
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="50.0" text="ID" />
           <TableColumn fx:id="makeColumn" prefWidth="75.0" text="Make" />
@@ -54,10 +54,14 @@
             <TextField fx:id="availableTextField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
-      <ChoiceBox fx:id="filterByChoiceBox" layoutX="532.0" layoutY="282.0" prefHeight="25.0" prefWidth="144.0" />
-      <Label layoutX="457.0" layoutY="286.0" text="Filter by:" />
+      <ChoiceBox fx:id="filterByChoiceBox" layoutX="530.0" layoutY="319.0" prefHeight="25.0" prefWidth="144.0" />
+      <Label layoutX="455.0" layoutY="323.0" text="Filter by:" />
       <Button fx:id="clearButton" layoutX="623.0" layoutY="207.0" mnemonicParsing="false" onAction="#clearFields" prefHeight="25.0" prefWidth="53.0" text="Clear" />
-      <Button fx:id="filterButton" layoutX="457.0" layoutY="313.0" mnemonicParsing="false" onAction="#filterByCars" prefHeight="25.0" prefWidth="88.0" text="Filter" />
-      <Button fx:id="restoreButton" layoutX="552.0" layoutY="313.0" mnemonicParsing="false" onAction="#restoreCars" prefHeight="25.0" prefWidth="124.0" text="Restore / Refresh" />
+      <Button fx:id="filterButton" layoutX="455.0" layoutY="350.0" mnemonicParsing="false" onAction="#filterByCars" prefHeight="25.0" prefWidth="88.0" text="Filter" />
+      <Button fx:id="restoreButton" layoutX="550.0" layoutY="350.0" mnemonicParsing="false" onAction="#restoreCars" prefHeight="25.0" prefWidth="124.0" text="Restore / Refresh" />
+      <Button fx:id="populateTableButton" layoutX="457.0" layoutY="276.0" mnemonicParsing="false" onAction="#populateTable" prefHeight="25.0" prefWidth="219.0" text="Populate table" />
+      <Label layoutX="458.0" layoutY="251.0" text="Number of entities:" />
+      <TextField fx:id="entitiesNumberTextField" layoutX="566.0" layoutY="247.0" prefHeight="25.0" prefWidth="111.0" />
+      <Button fx:id="increasePriceButton" layoutX="455.0" layoutY="395.0" mnemonicParsing="false" onAction="#increasePrice" prefHeight="25.0" prefWidth="219.0" text="Increase price for new cars" />
    </children>
 </Pane>

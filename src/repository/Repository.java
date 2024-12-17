@@ -17,4 +17,6 @@ public interface Repository<ID, T extends Identifiable<ID>> {
 
     Iterable<T> getAll();
 
+    int size();
+
 }

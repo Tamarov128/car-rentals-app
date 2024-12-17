@@ -10,6 +10,8 @@ import repository.memoryRepository.CarRepository;
 import repository.memoryRepository.ReservationRepository;
 import repository.fileRepository.textFile.CarTextFileRepository;
 import repository.fileRepository.textFile.ReservationTextFileRepository;
+import service.Service;
+import utils.exceptions.IDNotValidException;
 
 import java.io.*;
 import java.util.HashMap;
@@ -138,30 +140,86 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Properties prop = new Properties();
-        try {
-            prop.load(new FileReader("settings.properties"));
-            String repoType = (String)prop.get("repo_type");
+//        Properties prop = new Properties();
+//        try {
+//            prop.load(new FileReader("settings.properties"));
+//            String repoType = (String)prop.get("repo_type");
+//
+//            if (repoType.equals("memory")) {
+//                Start.startMemory();
+//            }
+//            if (repoType.equals("text")) {
+//                String carsPath = (String)prop.get("cars_path");
+//                String reservationsPath = (String)prop.get("reservations_path");
+//                Start.startText(carsPath, reservationsPath);
+//            }
+//            if (repoType.equals("binary")) {
+//                String carsPath = (String)prop.get("cars_path");
+//                String reservationsPath = (String)prop.get("reservations_path");
+//                Start.startBinary(carsPath, reservationsPath);
+//            }
+//            if (repoType.equals("database")) {
+//                String path = (String)prop.get("path");
+//                Start.startDatabase(path);
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
 
-            if (repoType.equals("memory")) {
-                Start.startMemory();
-            }
-            if (repoType.equals("text")) {
-                String carsPath = (String)prop.get("cars_path");
-                String reservationsPath = (String)prop.get("reservations_path");
-                Start.startText(carsPath, reservationsPath);
-            }
-            if (repoType.equals("binary")) {
-                String carsPath = (String)prop.get("cars_path");
-                String reservationsPath = (String)prop.get("reservations_path");
-                Start.startBinary(carsPath, reservationsPath);
-            }
-            if (repoType.equals("database")) {
-                String path = (String)prop.get("path");
-                Start.startDatabase(path);
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        Car car1 = new Car(1, "Toyota", "Camry", 120, 2019);
+        Car car2 = new Car(2, "Mazda", "MX-30", 250, 2021);
+        Car car3 = new Car(3, "Dacia", "Logan", 200, 2013);
+        Car car4 = new Car(4, "Mitsubishi", "Eclipse Cross", 240, 2024);
+        Car car5 = new Car(5, "Dacia", "Spring", 150, 2022);
+        Car car6 = new Car(6, "Toyota", "Camry", 120, 2019);
+        Car car7 = new Car(7, "Mazda", "MX-30", 250, 2021);
+        Car car8 = new Car(8, "Dacia", "Logan", 200, 2013);
+        Car car9 = new Car(9, "Mitsubishi", "Eclipse Cross", 240, 2024);
+        Car car10 = new Car(10, "Dacia", "Spring", 150, 2022);
+        Car car11 = new Car(11, "Toyota", "Camry", 120, 2019);
+        Car car12 = new Car(12, "Mazda", "MX-30", 250, 2021);
+        Car car13 = new Car(13, "Dacia", "Logan", 200, 2013);
+        Car car14 = new Car(14, "Mitsubishi", "Eclipse Cross", 240, 2024);
+        Car car15 = new Car(15, "Dacia", "Spring", 150, 2022);
+        Car car16 = new Car(16, "Toyota", "Camry", 120, 2019);
+        Car car17 = new Car(17, "Mazda", "MX-30", 250, 2021);
+        Car car18 = new Car(18, "Dacia", "Logan", 200, 2013);
+        Car car19 = new Car(19, "Mitsubishi", "Eclipse Cross", 240, 2024);
+        Car car20 = new Car(20, "Dacia", "Spring", 150, 2022);
+
+        CarRepository carRepository = new CarRepository();
+        try {
+            carRepository.add(car1.getId(), car1);
+            carRepository.add(car2.getId(), car2);
+            carRepository.add(car3.getId(), car3);
+            carRepository.add(car4.getId(), car4);
+            carRepository.add(car5.getId(), car5);
+            carRepository.add(car6.getId(), car6);
+            carRepository.add(car7.getId(), car7);
+            carRepository.add(car8.getId(), car8);
+            carRepository.add(car9.getId(), car9);
+            carRepository.add(car10.getId(), car10);
+            carRepository.add(car11.getId(), car11);
+            carRepository.add(car12.getId(), car12);
+            carRepository.add(car13.getId(), car13);
+            carRepository.add(car14.getId(), car14);
+            carRepository.add(car15.getId(), car15);
+            carRepository.add(car16.getId(), car16);
+            carRepository.add(car17.getId(), car17);
+            carRepository.add(car18.getId(), car18);
+            carRepository.add(car19.getId(), car19);
+            carRepository.add(car20.getId(), car20);
         }
+        catch (IDNotValidException e) {
+            throw new RuntimeException(e);
+        }
+
+        ReservationRepository reservationRepository = new ReservationRepository();
+        Service service = new Service(carRepository, reservationRepository);
+
+        service.increasePriceExecutorService(50, 2021, 4);
+        System.out.println("Updated prices of cars produced after 2021 to 50% more");
+        UI ui = new UI(carRepository, reservationRepository);
+        ui.run();
     }
 }

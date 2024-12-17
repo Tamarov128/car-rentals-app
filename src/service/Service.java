@@ -11,6 +11,8 @@ import utils.validators.CarValidator;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 public class Service {
@@ -308,5 +310,87 @@ public class Service {
                 .mapToDouble(Reservation::getPrice)
                 .sum();
         return "Total rental price: " + totalPrice;
+    }
+
+    public void populateCars(int entitiesNumber) throws IDNotValidException, CarNotValidException  {
+        int currentEntitiesNumber = 0;
+        for (Car car : carsRepo.getAll()) {
+            currentEntitiesNumber++;
+        }
+        for (int i = 1; i <= entitiesNumber; i++) {
+            int id = currentEntitiesNumber + i;
+            String make = "Make" + id;
+            String model = "Model" + id;
+            float rentalPrice = 100 + (i % 200);
+            int manufacturingYear = 2000 + (i % 24);
+            Car newCar = new Car(id, make, model, rentalPrice, manufacturingYear);
+            addCar(newCar);
+        }
+    }
+
+    public void increasePriceTraditionalThreads(double percentage, int year, int threadsNumber) {
+        int carsNumber = carsRepo.size();
+        int chunkSize = Math.ceilDiv(carsNumber, threadsNumber);
+
+        ArrayList<Thread> threads = new ArrayList<>();
+
+        for (int i = 0; i < threadsNumber; i++) {
+
+            int start = i * chunkSize + 1;
+            int end = (i == threadsNumber - 1) ? carsNumber + 1 : start + chunkSize;
+
+            Thread thread = new Thread(() -> {
+                for (int j = start; j < end; j++) {
+                    Car car = carsRepo.findById(j).get();
+                    if (car.getManufacturingYear() >= year) {
+                        Car newCar = new Car(car);
+                        newCar.setRentalPrice((float) (car.getRentalPrice() * (1 + percentage / 100)));
+                        try {
+                            updateCar(j, newCar);
+                        } catch (IDNotValidException | CarNotValidException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+            });
+            threads.add(thread);
+            thread.start();
+        }
+        for (Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public void increasePriceExecutorService(double percentage, int year, int threadsNumber) {
+        int carsNumber = carsRepo.size();
+        int chunkSize = Math.ceilDiv(carsNumber, threadsNumber);
+
+        ExecutorService executorService = Executors.newFixedThreadPool(threadsNumber);
+
+        for (int i = 0; i < threadsNumber; i++) {
+
+            int start = i * chunkSize + 1;
+            int end = (i == threadsNumber - 1) ? carsNumber + 1 : start + chunkSize;
+
+            executorService.submit(() -> {
+                for (int j = start; j < end; j++) {
+                    Car car = carsRepo.findById(j).get();
+                    if (car.getManufacturingYear() >= year) {
+                        Car newCar = new Car(car);
+                        newCar.setRentalPrice((float) (car.getRentalPrice() * (1 + percentage / 100)));
+                        try {
+                            updateCar(j, newCar);
+                        } catch (IDNotValidException | CarNotValidException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+            });
+        }
+        executorService.shutdown();
     }
 }
