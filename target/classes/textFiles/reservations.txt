@@ -1,2 +1,0 @@
-1,Elena,1,Toyota,Camry,120.0,2018,false
-2,Elena,4,Mitsubishi,Eclipse Cross,240.0,2024,true
